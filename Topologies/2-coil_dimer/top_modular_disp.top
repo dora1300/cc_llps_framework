@@ -1,0 +1,50 @@
+; Topology file for a coil model
+; Includes .itp files, which are set manually
+; updated to include new VdW parameter format
+; This uses the modified topology parameters for specific oligomers
+; Updated 2022.11.23
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               1               yes              1.0     0
+
+[ atomtypes ]
+;name   mass     charge   ptype  V(C6, attra)  W(C12, repul)
+ Adim1   109.0    0.000   A        6.9132E-03    5.97404E-05
+ Adim2   109.0    0.000   A        6.9132E-03    5.97404E-05
+ B      109.0    0.000   A        0             5.97404E-05
+ Di     109.0    0.000   A        6.9132E-03    5.97404E-05
+
+[ nonbond_params ]
+;i     j      func     V(C6, attra)    W(C12, repul)
+; self-self interactions
+ Adim1  Adim1   1        7.559142E-01     2.597302E-02
+ Adim2  Adim2   1        7.559142E-01     2.597302E-02
+ B      B       1        0                5.974044E-04
+ Di     Di      1        6.000000E+00     3.000000E+00
+; coil cross interactions
+ Adim1  Adim2   1        0                5.974044E-04
+ 
+; dimer-other cross interactions
+ Adim1  B      1        0                5.907375E-04
+ Adim1  Di     1        0                5.907375E-04
+
+; dimer-other cross interactions
+ Adim2  B      1        0                5.907375E-04
+ Adim2  Di     1        0                5.907375E-04
+
+; backbone (noninteracting) interactions
+ B     Di     1        0                5.97404E-04
+
+
+; Include the individual .itps for different molecules
+; This is set MANUALLY - DONT FORGET!
+#include "itp_c2l1_dimer_spec.itp"
+
+[ system ]
+; Name
+Coil-model-simulation
+
+[ molecules ]
+;moleculetype-name    # molecules
+c2l1_spec_di            225

@@ -1,0 +1,70 @@
+;
+;    NPT Equilibration MDP file --> anisotropic in Z-axis
+;    for simulations using the Stochastic Dynamics (Langevin) integrator
+;
+;   Part of series for making slab-configuration for phase separation
+;
+
+; ---- Run control
+integrator            = sd            ; stochastic dynamics integrator
+                                      ; when used, tcoupl and nsttcouple are ignored
+tinit                 = 0
+dt                    = 0.020         ; units of ps
+nsteps                = 10000000       ; units of (ps) ==> total time = 200 ns (200000 ps)
+comm-mode             = Linear        ; remove the center of mass translational velocity
+nstcomm               = 10             ; frequency for center of mass motion removal
+ld-seed               = -1            ; Need to randomize every time!!
+                                      ; random noise generator for thermal noise with sd
+
+
+
+; ---- Output control
+nstlog                = 5000
+nstcalcenergy         = 10
+nstenergy             = 5000
+nstxout-compressed    = 5000
+
+
+
+; ---- Neighbor searching and short-range nonbonded interactions
+cutoff-scheme            = Verlet
+nstlist                  = 10        ; default value for Gromacs 2021
+pbc                      = xyz
+verlet-buffer-tolerance  = 1E-7     ; kJ mol^-1 ps^-1
+
+; van der Waals
+vdw-type                = Cut-off
+vdw-modifier            = Potential-shift
+rvdw                    = 1.1
+
+
+; Electrostatics
+coulombtype             = Cut-off
+rcoulomb                = 1.1
+
+
+
+; ---- Pressure controlling and coupling
+; This is partially guided by Martini parameters
+; I am setting xy values to 0 to prevent changing those box sizes. Only alter Z-dimension
+pcoupl                  = Parrinello-Rahman
+pcoupltype              = semiisotropic     ; must provide two values for xy and z
+tau-p                   = 5         ; coupling time (ps), chosen randomly for now
+compressibility         = 0 3e-4    ; (bar^-1) inspired by Martini
+ref-p                   = 0 1       ; (bar)
+
+;nstpcouple             = -1  This is default i.e. 10, just to keep in mind
+
+
+
+; ---- Velocity generation
+gen-vel                 = no         ; only useful for the md integrator
+
+
+
+; ---- Temperature controlling and Langevin noise
+tc-grps                 = System
+tau-t                   = 5          ; this is the suggested value, in units of ps
+                                     ; this corresponds to a friction coefficient of 0.5
+                                     ; tau-t = (1/friction coefficient)
+ref-t                   = 150.0      ; in units of (K)

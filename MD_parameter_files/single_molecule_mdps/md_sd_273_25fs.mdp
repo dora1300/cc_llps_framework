@@ -1,0 +1,59 @@
+;
+;    MD .mdp production file
+;       designed specifically for the slab procedure
+;    for simulations using the Stochastic Dynamics (Langevin) integrator
+;
+;   Part of series for making slab-configuration for phase separation
+;
+
+; ---- Run control
+integrator            = sd            ; stochastic dynamics integrator
+                                      ; when used, tcoupl and nsttcouple are ignored
+tinit                 = 0
+dt                    = 0.025         ; units of ps
+nsteps                = 200000000     ; units of (ps) ==> total time = 5 us == 5000 ns
+comm-mode             = Linear        ; remove the center of mass translational velocity
+nstcomm               = 10            ; frequency for center of mass motion removal
+ld-seed               = -1            ; Need to randomize every time!!
+                                      ; random noise generator for thermal noise with sd
+
+
+
+; ---- Output control
+nstlog                = 10000
+nstcalcenergy         = 10
+nstenergy             = 10000
+nstxout-compressed    = 10000
+
+
+; ---- Neighbor searching and short-range nonbonded interactions
+cutoff-scheme            = Verlet
+nstlist                  = 10        ; default value for Gromacs 2021
+pbc                      = xyz
+verlet-buffer-tolerance  = 1E-7     ; kJ mol^-1 ps^-1
+
+; van der Waals
+vdw-type                = Cut-off
+vdw-modifier            = Potential-shift
+rvdw                    = 1.1
+
+; Electrostatics
+coulombtype             = Cut-off
+rcoulomb                = 1.1
+
+
+
+; ---- Pressure controlling and coupling
+pcoupl                  = no
+
+
+
+; ---- Velocity generation
+gen-vel                 = no         ; only useful for the md integrator
+
+
+
+; ---- Temperature controlling and Langevin noise
+tc-grps                 = System
+tau-t                   = 5          ; new value to use
+ref-t                   = 273      ; in units of (K)

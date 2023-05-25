@@ -1,0 +1,50 @@
+; Topology file for a coil model
+; Includes .itp files, which are set manually
+; updated to include new VdW parameter format
+; This uses the modified topology parameters for specific oligomers
+; Updated 2022.11.23
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               1               yes              1.0     0
+
+[ atomtypes ]
+;name   mass     charge   ptype  V(C6, attra)  W(C12, repul)
+ Atri1   109.0    0.000   A        6.9132E-03    5.97404E-05
+ Atri2   109.0    0.000   A        6.9132E-03    5.97404E-05
+ B      109.0    0.000   A        0             5.97404E-05
+ Tri     109.0    0.000   A        6.9132E-03    5.97404E-05
+
+[ nonbond_params ]
+;i     j      func     V(C6, attra)    W(C12, repul)
+; self-self interactions
+ Atri1  Atri1   1        5.978594E-01     2.054229E-02
+ Atri2  Atri2   1        5.978594E-01     2.054229E-02
+ B      B       1        0                5.974044E-04
+ Tri     Tri      1      2.125764E+00     5.648591E-01
+; coil cross interactions
+ Atri1  Atri2   1        0                5.974044E-04
+ 
+; trier-other cross interactions
+ Atri1  B      1        0                 5.907375E-04
+ Atri1  Tri     1        0                5.907375E-04
+
+; trier-other cross interactions
+ Atri2  B      1        0                 5.907375E-04
+ Atri2  Tri     1        0                5.907375E-04
+
+; backbone (noninteracting) interactions
+ B     Tri     1        0                 5.97404E-04
+
+
+; Include the individual .itps for different molecules
+; This is set MANUALLY - DONT FORGET!
+#include "itp_c2l1_trimer_spec.itp"
+
+[ system ]
+; Name
+Coil-model-simulation
+
+[ molecules ]
+;moleculetype-name    # molecules
+c2l1_spec_tri         225

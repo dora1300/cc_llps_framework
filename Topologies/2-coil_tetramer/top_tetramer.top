@@ -1,0 +1,46 @@
+; Topology file for a coil model
+; Includes .itp files, which are set manually
+; updated to include new VdW parameter format
+; Also includes updated B-B repulsion interaction set at 2kJ/mol
+; but only for the nonbond_param
+; FOR DAR3-36b -- testing smaller sticky beads
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               1               yes              1.0     0
+
+[ atomtypes ]
+;name   mass     charge   ptype  V(C6, attra)  W(C12, repul)
+ Atet1  109.0    0.000    A      6.9132E-03    5.97404E-05
+ Atet2  109.0    0.000    A      6.9132E-03    5.97404E-05
+ B      109.0    0.000    A      0             5.97404E-05
+ Tet    109.0    0.000    A      6.9132E-03    5.97404E-05
+
+[ nonbond_params ]
+;i      j      func     V(C6, attra)    W(C12, repul)
+ Atet1  Atet1  1        9.411920E-01     5.536515E-02
+ Atet2  Atet2  1        9.411920E-01     5.536515E-02
+ B      B      1        0                5.97404E-04
+ Tet    Tet    1        1.048576E+00     1.374390E-01
+;
+ Atet1  Atet2  1        0.0              5.907375E-04
+;
+ Atet1  B      1        0.0              5.907375E-04
+ Atet1  Tet    1        0.0              5.907375E-04
+ Atet2  B      1        0.0              5.907375E-04
+ Atet2  Tet    1        0.0              5.907375E-04
+;
+ B      Tet    1        0                5.97404E-04
+
+
+; Include the individual .itps for different molecules
+; This is set MANUALLY - DONT FORGET!
+#include "itp_c2l1_tet.itp"
+
+[ system ]
+; Name
+Coil-model-simulation
+
+[ molecules ]
+;moleculetype-name    # molecules
+c2l1_tet              225
