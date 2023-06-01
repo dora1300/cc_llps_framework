@@ -1,0 +1,10 @@
+﻿# Example design file for building a CC protein
+# Description of the file format and how to use this is provided in the proteinBuilding_README.md
+# Design files MUST be .CSV. There are 6 columns that hold information about each segment. The columns are:
+# Segment type , start index of segment (1-index) , end index of segment (1-index) , start index of first 'a' heptad position, type of multimer, special ID for multimer
+# See the below design file for making a 3-coil-2-linker protein with dimer-forming coils, each coil with a unique ID to enforce the maximally specific interaction regime,,,,
+coil,1,32,1,dim,1
+linker,33,57,,,
+coil,58,89,58,dim,2
+linker,90,114,,,
+coil,115,146,115,dim,3
