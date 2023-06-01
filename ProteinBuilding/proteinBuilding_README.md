@@ -10,7 +10,8 @@ Using the two scripts plus a custom `design_file.csv`, you can make any desired 
 ## Description of files
 
 ### `model_maker.py`
-`usage: model_maker.py [-h] [-df DF] -n N [-name NAME]
+```
+usage: model_maker.py [-h] [-df DF] -n N [-name NAME]
 
 Model Maker Tool -- use this to turn your desired CC protein into a starting PDB structure! Easy, and corresponds with the Topology Assistant
 too. Spreads on easy, like Ubik!
@@ -19,7 +20,8 @@ optional arguments:
   -h, --help  show this help message and exit
   -df DF      Definition file: this contains the information on how to build the protein, with alternating coil and linker segments.
   -n N        The number of beads in the CC protein.
-  -name NAME  The name you'd like to give the CC protein. No extensions, please!`
+  -name NAME  The name you'd like to give the CC protein. No extensions, please!
+```
   
 This script uses PeptideBuilder, ProDy, and BioPython to make a 3D structure for a protein of your choosing. You create a `design_file.csv` which details how you want to build a CC protein and supply it to this script. It outputs 3 different files: (1) `output.pdb`, which is an all-atom representation of your protein; (2) `output_ca.pdb` which is the C-alpha coarse-grained version of the protein, and (2) `output_aa_dihedrals.csv` which calculates the dihedral angles, and the corresponding C-alpha pseudo-angles, for each residue.
 
@@ -27,7 +29,8 @@ IMPORTANT! -- PeptideBuilder requires a protein sequence to make a protein. The 
 
 
 ### `topology_assistant.py`
-`usage: topology_assistant.py [-h] [-df DF] -n N [-itp] [-itp_filename ITP_FILENAME]
+```
+usage: topology_assistant.py [-h] [-df DF] -n N [-itp] [-itp_filename ITP_FILENAME]
 
 Topology Writer Tool -- Use this to make topology files for CC proteins, easy as pie! Cheap as Ubik, too!
 
@@ -37,7 +40,8 @@ optional arguments:
   -n N                  The number of beads in the CC protein.
   -itp                  Activate to turn on .itp file writer.
   -itp_filename ITP_FILENAME
-                        File name for the .itp file. Please provide extension.`
+                        File name for the .itp file. Please provide extension.
+```
 
 This script automatically makes the `.itp` topology file you need to represent your protein of interest. It uses the exact same `design_file.csv` that you use with `model_maker.py`. The overall topology `.top` file must be made manually, but I've provided `.top` files that I used in this study for your own use and modification as well.
 

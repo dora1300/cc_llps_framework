@@ -9,9 +9,13 @@ Code and files related to the CC LLPS simulation framework manuscript.
 ## Description of contents
 
 ### Custom\_scripts
+This folder contains the scripts to do the multimerization counting analysis, which was used in Figure S4. Other analyses like density profile and molecular cluster analyses are tools provided by GROMACS.
 
 ### MD\_parameter\_files
 This folder contains the `.mdp` files for the single molecule and slab simulation procedures.
+
+### Protein building
+This folder contains the scripts to do the actual protein building, with instructions and an example.
 
 ### Topologies
 This folder contains all of the topology files (`.itp` and `.top`) for all of the proteins described in this manuscript.
